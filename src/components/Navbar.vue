@@ -12,10 +12,11 @@
                     <a href="#">Customers</a>
                 </li>
                 <li>
-                    <a href="#">Home</a>
+                    <router-link to="/">Home</router-link>
+                    
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <router-link to="/About">About</router-link>
                 </li>
             </ul>
             <div class="ml-auto block text-gray-800 hover:text-black font-rubik font-medium">
