@@ -1,7 +1,18 @@
 <script setup>
+import {ref} from 'vue'
 
+const addCustomersParse = JSON.parse(localStorage.getItem('addCustomers'))
+const customers = addCustomersParse
 
-
+const isShowDemoCustomer = () =>{
+    let isShow = true
+    if(addCustomersParse){
+        isShow = false
+    }else{
+        isShow = true
+    }
+    return isShow
+}
 </script>
 
 <template>
@@ -14,7 +25,7 @@
                 </router-link>
                 
             </div>
-            <input class="w-full focus:outline-none mt-8 bg-gray-100 broder text-sm font-normal border-gray-100 px-2 py-2" type="text" placeholder="Enter Last Name">
+            <input type="text" class="w-full focus:outline-none mt-8 bg-gray-200 broder text-sm font-normal border-gray-100 px-2 py-2" placeholder="Enter Last Name">
             
             <table class="table-auto w-full text-left mt-5">
                 <thead>
@@ -25,13 +36,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-if="isShowDemoCustomer()">
                         <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">Hello World</td>
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">Hello World</td>
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">Hello World</td>
                         <td class="border-b border-gray-300 py-2 flex justify-center m-auto ">
                             <button class="text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
-                                View
+                                Demo
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <tr v-for="customer in customers" :key="customer.id">
+                        <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.firstName }}</td>
+                        <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.lastName }}</td>
+                        <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.email }}</td>
+                        <td class="border-b border-gray-300 py-2 flex justify-center pb-2">
+                            <button class="text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
+                                Click
                             </button>
                         </td>
                     </tr>
@@ -46,10 +68,12 @@
 
 
 <style scoped>
- tr:nth-child(even) {
-        background-color: #ebebeb;
+
+    tr:nth-child(even){
+        background-color: #f1f1f1;
     }
-    tr:nth-child(od) {
+    tr:nth-child(od){
         background-color: #fff;
     }
+
 </style>

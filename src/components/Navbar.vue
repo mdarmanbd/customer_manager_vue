@@ -5,7 +5,7 @@
 </script>
 
 <template>
-    <div class="bg-gray-100 ">
+    <div class="bg-gray-100 sticky top-0 z-50">
         <div class="flex items-center w-[850px] m-auto py-2">
             <ul class="[&>li]:text-gray-800 flex space-x-5 [&>*]:text-sm [&>*]:font-rubik [&>*]:font-medium">
                 <li >
@@ -13,7 +13,6 @@
                 </li>
                 <li>
                     <router-link to="/">Home</router-link>
-                    
                 </li>
                 <li>
                     <router-link to="/About">About</router-link>
