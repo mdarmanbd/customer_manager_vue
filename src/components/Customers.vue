@@ -4,6 +4,7 @@ import {ref, reactive} from 'vue'
 const addCustomersParse = JSON.parse(localStorage.getItem('addCustomers')) || []
 
 const addCustomers = reactive(addCustomersParse)
+
 const firstName = ref('')
 const lastName = ref('')
 const amout = ref()
@@ -103,7 +104,6 @@ const submitButton = () => {
                         <input v-model="state" type="text" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="State">
                     </div>
                    
-
                     <button type="submit" class="mt-3 text-sm bg-cyan-600 block items-center py-1.5 px-3 text-white font-normal rounded cursor-pointer">
                         Submit
                     </button>

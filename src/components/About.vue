@@ -1,9 +1,12 @@
 <script setup>
+import { reactive, ref } from 'vue';
+
+
 
 </script>
 
 <template>
-  <h3 class="text-green-500 text-2xl">About pages</h3>
+  <h1 class="text-green-500 text-2xl">This is about page</h1>
 </template>
 
 

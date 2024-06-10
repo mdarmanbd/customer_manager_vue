@@ -16,8 +16,8 @@ const isShowDemoCustomer = () =>{
 </script>
 
 <template>
-    <div class="bg-gray-50">
-        <div class="w-[850px] m-auto h-screen overflow-y-auto pt-14">
+    <div class="bg-gray-50 h-screen">
+        <div class="w-[850px] m-auto pt-14">
             <div class="flex justify-between items-center">
                 <h3 class="text-lg font-semibold text-gray-700">Customers</h3>
                 <router-link to="/Customers">
@@ -52,9 +52,11 @@ const isShowDemoCustomer = () =>{
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.lastName }}</td>
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.email }}</td>
                         <td class="border-b border-gray-300 py-2 flex justify-center pb-2">
-                            <button class="text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
-                                Click
-                            </button>
+                            <router-link :to="`/Customers/${customer.id}`">
+                                <button class="text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
+                                    Click
+                                </button>
+                            </router-link>
                         </td>
                     </tr>
                 </tbody>
