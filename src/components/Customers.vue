@@ -1,13 +1,15 @@
 <script setup>
 import {ref, reactive} from 'vue'
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 
 const addCustomersParse = JSON.parse(localStorage.getItem('addCustomers')) || []
-
 const addCustomers = reactive(addCustomersParse)
 
 const firstName = ref('')
 const lastName = ref('')
-const amout = ref()
+const amount = ref()
 const email = ref('')
 const phone = ref()
 const address = ref()
@@ -15,18 +17,35 @@ const city = ref()
 const state = ref()
 const isPhoneNumerError = ref(false)
 
-const submitButton = () => {
+const toasterNotification = (massage,type) => {
 
-    const regexPhone = /^\d{11}$/;
+    toast(massage, {
+            type: type,
+            autoClose: 1000,
+            transition: toast.TRANSITIONS.BOUNCE,
+            position: toast.POSITION.TOP_RIGHT,
+            toastStyle: {
+                fontSize: '14px',
+                color: 'green',
+            },
+        })
+}
+
+const submitButton = () => {
+    const regexPhone = /^\d{2}$/;
     
     if(regexPhone.test(phone.value)){
+
+        toasterNotification('Successfuly add a customers','success')
+
+
         isPhoneNumerError.value = false
 
         addCustomers.push({
             id: addCustomers.length + 1,
             firstName: firstName.value,
             lastName: lastName.value,
-            amout: amout.value,
+            amount: amount.value,
             email: email.value,
             phone: phone.value,
             address: address.value,
@@ -38,7 +57,7 @@ const submitButton = () => {
 
         firstName.value = ''
         lastName.value = ''
-        amout.value = 
+        amount.value = 
         email.value = ''
         phone.value = 
         address.value = ''
@@ -60,7 +79,7 @@ const submitButton = () => {
         <div class="w-[850px]  m-auto py-5">
             <h3 class="text-lg font-semibold text-gray-700 ">Add Customers</h3>
             <div class="bg-gray-100 py-2 px-4 mt-3 ">
-                <p>{{ addCustomers }}</p>
+                <!-- <p>{{ addCustomers }}</p> -->
                 <p class="text-sm text-gray-900 font-bold my-3">Customers info</p>
                 <form @submit.prevent="submitButton()">
                     <div class="flex items-center">
@@ -74,7 +93,7 @@ const submitButton = () => {
 
                     <div class="flex items-center mt-3">
                         <label class="text-sm text-gray-800 font-medium w-[100px] block ">Amount: </label>
-                        <input v-model="amout" required type="number" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Amout">
+                        <input v-model="amount" required type="number" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Amout">
                     </div>
 
                     <p class="text-sm text-gray-900 font-bold my-4">Customers Contact</p>
