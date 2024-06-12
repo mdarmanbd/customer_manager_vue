@@ -1,42 +1,37 @@
 <script setup>
 import { ref } from 'vue';
 import{useRoute} from 'vue-router'
-import router from '../router/router'
+import router from '../router/router';
+import { store } from '../store/store';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 const route = useRoute()
 const routeId = route.params.id
-const index = routeId - 1
+// const index = routeId - 1
+const findCustomerIndex = store.findCustomerIndex
 const addCustomersParse = JSON.parse(localStorage.getItem('addCustomers'))
-const customer = ref( addCustomersParse[index] || {}) 
+const customer = ref( addCustomersParse[findCustomerIndex] || {}) 
 const isEditPageShow = ref(false)
 
-// const toasterNotification = (massage,type) => {
-//         toast(massage, {
-//             type: type,
-//             autoClose: 1000,
-//             transition: toast.TRANSITIONS.BOUNCE,
-//             position: toast.POSITION.TOP_RIGHT,
-//             toastStyle: {
-//                 fontSize: '14px',
-//                 color: 'green',
-//             },
-//         })
 
-//     }
 
 const editCustomer = () => {
     isEditPageShow.value = true
+}
+
+const deleteCustomer = () => {
+    addCustomersParse.splice(findCustomerIndex , 1)
+    localStorage.setItem('addCustomers', JSON.stringify(addCustomersParse))
+     router.push('/')
 }
 
 const backToCustomer = () =>{
     isEditPageShow.value = false
 }
 const submitButton = () => {
-    addCustomersParse[index] = customer.value;
+    addCustomersParse[findCustomerIndex] = customer.value;
     localStorage.setItem('addCustomers', JSON.stringify(addCustomersParse));
-    // toasterNotification('Successfuly edit', 'success')
     router.push('/')
    
 }
@@ -44,7 +39,10 @@ const submitButton = () => {
 
 <template>
     <div class="bg-gray-50 ">
-        
+      routed Id:  {{ routeId }}
+        <br>
+
+    {{ addCustomersParse[findCustomerIndex] }}
         <div class="w-[850px] m-auto pt-5 h-screen">
             <router-link v-if="!isEditPageShow" to="/" class="block pb-3">
               <button class="bg-gray-200 py-1 px-3 text-gray-800 text-sm font-medium">
@@ -64,6 +62,9 @@ const submitButton = () => {
                 </div>
             </div>
             <div v-if="!isEditPageShow" class="mt-10">
+                <h4 class="text-gray-600 font-normal text-base pb-2">
+                    ID : <span class="font-medium text-green-500">{{ customer.id }}</span> 
+                </h4>
                 <h4 class="text-gray-600 font-normal text-base pb-2">
                     Amout : <span class="font-medium">{{ customer.amount }}</span> 
                 </h4>

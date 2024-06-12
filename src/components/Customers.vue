@@ -3,7 +3,7 @@ import {ref, reactive} from 'vue'
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-
+let lastUsedId = JSON.parse(localStorage.getItem('lastUsedId')) || 0;
 const addCustomersParse = JSON.parse(localStorage.getItem('addCustomers')) || []
 const addCustomers = reactive(addCustomersParse)
 
@@ -15,6 +15,7 @@ const phone = ref()
 const address = ref()
 const city = ref()
 const state = ref()
+const count = ref(1)
 const isPhoneNumerError = ref(false)
 
 const toasterNotification = (massage,type) => {
@@ -32,6 +33,7 @@ const toasterNotification = (massage,type) => {
 }
 
 const submitButton = () => {
+
     const regexPhone = /^\d{2}$/;
     
     if(regexPhone.test(phone.value)){
@@ -40,9 +42,10 @@ const submitButton = () => {
 
 
         isPhoneNumerError.value = false
-
+        lastUsedId++;
         addCustomers.push({
-            id: addCustomers.length + 1,
+            // addCustomers.length +1
+            id: lastUsedId,
             firstName: firstName.value,
             lastName: lastName.value,
             amount: amount.value,
@@ -52,7 +55,7 @@ const submitButton = () => {
             city: city.value,
             state: state.value
         })
-
+        localStorage.setItem('lastUsedId', JSON.stringify(lastUsedId));
         localStorage.setItem('addCustomers', JSON.stringify(addCustomers))
 
         firstName.value = ''
