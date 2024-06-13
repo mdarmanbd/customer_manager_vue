@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^10.11.0",
     "axios": "^1.6.7",
     "leaflet": "^1.9.4",
     "swiper": "^11.1.1",

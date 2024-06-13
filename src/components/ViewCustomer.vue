@@ -39,10 +39,9 @@ const submitButton = () => {
 
 <template>
     <div class="bg-gray-50 ">
-      routed Id:  {{ routeId }}
+      <!-- routed Id:  {{ routeId }}
         <br>
-
-    {{ addCustomersParse[findCustomerIndex] }}
+    {{ addCustomersParse[findCustomerIndex] }} -->
         <div class="w-[850px] m-auto pt-5 h-screen">
             <router-link v-if="!isEditPageShow" to="/" class="block pb-3">
               <button class="bg-gray-200 py-1 px-3 text-gray-800 text-sm font-medium">
