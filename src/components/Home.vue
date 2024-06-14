@@ -5,6 +5,8 @@ import router from '../router/router';
 import LoginForm from './LoginForm.vue';
 
 const addCustomersParse = JSON.parse(localStorage.getItem('addCustomers'))
+const isAuthenticationParse = JSON.parse(localStorage.getItem('isAuthentication'))
+const isAuthentication = ref(isAuthenticationParse)
 const customers = ref(addCustomersParse)
 const searchCustomer = ref('');
 
@@ -20,12 +22,12 @@ const isShowDemoCustomer = () =>{
     
 }
 
-const filteredCustomers = computed(() => {
-  const searchValue = searchCustomer.value.toLowerCase();
-  return customers.value.filter(customer => 
-    customer.firstName.toLowerCase().includes(searchValue)
-  );
-});
+// const filteredCustomers = computed(() => {
+//   const searchValue = searchCustomer.value.toLowerCase();
+//   return customers.value.filter(customer => 
+//     customer.firstName.toLowerCase().includes(searchValue)
+//   );
+// });
 
 
 const addCustomers = () => {
@@ -38,10 +40,18 @@ const addCustomers = () => {
 <template>
     <div class="bg-gray-50 h-screen">
         <!-- {{ searchCustomer }} -->
+          <div v-if="!isAuthentication" class="pt-3">
+              <div class="w-[400px] block border border-yellow-500 m-auto shadow py-2 px-5 rounded">
+                <p class="text-sm text-yellow-800 font-normal ">
+                    please log in with your email account
+                </p>
+              </div>
+          </div>
         <div class="w-[850px] m-auto pt-14">
             <div class="flex justify-between items-center">
                 <h3 class="text-lg font-semibold text-gray-700">Customers</h3>
-                    <button @click="addCustomers()" class="cursor-pointer text-sm bg-gray-200 block items-center py-1.5 px-3 text-gray-800 font-medium rounded ">Add Customers</button>
+                    <button v-if="!isAuthentication" class="cursor-not-allowed text-sm bg-gray-200 block items-center py-1.5 px-3 text-gray-800 font-medium rounded ">Add Customers</button>
+                    <button v-if="isAuthentication" @click="addCustomers()" class="cursor-pointer text-sm bg-gray-200 block items-center py-1.5 px-3 text-gray-800 font-medium rounded ">Add Customers</button>
             </div>
             <input v-model="searchCustomer" type="text" class="w-full focus:outline-none mt-8 bg-gray-200 broder text-sm font-normal border-gray-100 px-2 py-2" placeholder="Enter Last Name">
             
@@ -64,7 +74,7 @@ const addCustomers = () => {
                             </button>
                         </td>
                     </tr>
-                    <tr v-for="(customer,index) in filteredCustomers" :key="customer.id" >
+                    <tr v-for="(customer,index) in customers" :key="customer.id" >
                         <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.firstName }}</td>
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.amount }}</td>
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.address }}</td>

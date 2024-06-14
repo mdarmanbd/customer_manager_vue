@@ -1,8 +1,30 @@
 <script setup>
 import { ref } from 'vue';
 import { store } from '../store/store';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
+const isAuthenticationParse = JSON.parse(localStorage.getItem('isAuthentication'))
+const isAuthentication = ref(isAuthenticationParse)
 
+const toasterNotification = (massage,type) => {
+  toast(massage, {
+          type: type,
+          autoClose: 1000,
+          transition: toast.TRANSITIONS.BOUNCE,
+          position: toast.POSITION.TOP_RIGHT,
+          toastStyle: {
+              fontSize: '14px',
+              color: 'yellow',
+          },
+      })
+}
+
+const logOut = () => {
+    isAuthentication.value = false
+    localStorage.setItem('isAuthentication', JSON.stringify(isAuthentication.value))
+    toasterNotification('successfuly log out', 'warning')
+}
 
 </script>
 
@@ -20,8 +42,11 @@ import { store } from '../store/store';
                     <router-link to="/About">About</router-link>
                 </li>
             </ul>
-            <div @click="store.login()" class="cursor-pointer ml-auto block text-gray-800 hover:text-black font-rubik font-medium">
+            <div v-if="!isAuthentication" @click="store.login()" class="cursor-pointer ml-auto block text-gray-800 hover:text-black font-rubik font-medium">
                 Log in
+            </div>
+            <div v-if="isAuthentication" @click="logOut()" class="cursor-pointer ml-auto block text-gray-800 hover:text-black font-rubik font-medium">
+                Log out
             </div>
         </div>
     </div>

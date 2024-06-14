@@ -19,7 +19,6 @@ const count = ref(1)
 const isPhoneNumerError = ref(false)
 
 const toasterNotification = (massage,type) => {
-
     toast(massage, {
             type: type,
             autoClose: 1000,
