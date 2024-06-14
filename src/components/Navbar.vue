@@ -1,29 +1,21 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { store } from '../store/store';
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+import router from '../router/router';
+
 
 const isAuthenticationParse = JSON.parse(localStorage.getItem('isAuthentication'))
 const isAuthentication = ref(isAuthenticationParse)
 
-const toasterNotification = (massage,type) => {
-  toast(massage, {
-          type: type,
-          autoClose: 1000,
-          transition: toast.TRANSITIONS.BOUNCE,
-          position: toast.POSITION.TOP_RIGHT,
-          toastStyle: {
-              fontSize: '14px',
-              color: 'yellow',
-          },
-      })
-}
 
 const logOut = () => {
+    const addCustomers = []
+    const lastUsedId = 0
     isAuthentication.value = false
     localStorage.setItem('isAuthentication', JSON.stringify(isAuthentication.value))
-    toasterNotification('successfuly log out', 'warning')
+    localStorage.setItem('lastUsedId', JSON.stringify(lastUsedId));
+    localStorage.setItem('addCustomers', JSON.stringify(addCustomers))
+    window.location.reload();
 }
 
 </script>
@@ -31,7 +23,7 @@ const logOut = () => {
 <template>
     <div :class="store.isModalOpen ? 'bg-gray-100 bg-opacity-50 transition':'bg-gray-100'" class=" sticky top-0 z-50">
         <div class="flex items-center w-[850px] m-auto py-2">
-            <ul class="[&>li]:text-gray-800 flex space-x-5 [&>*]:text-sm [&>*]:font-rubik [&>*]:font-medium">
+            <ul class="[&>li]:text-gray-800 flex space-x-5 [&>*]:text-base [&>*]:font-rubik [&>*]:font-medium">
                 <li >
                     <a href="#">Customers</a>
                 </li>
@@ -42,11 +34,13 @@ const logOut = () => {
                     <router-link to="/About">About</router-link>
                 </li>
             </ul>
-            <div v-if="!isAuthentication" @click="store.login()" class="cursor-pointer ml-auto block text-gray-800 hover:text-black font-rubik font-medium">
+            <div v-if="!isAuthentication" @click="store.login()" class="cursor-pointer ml-auto block text-base text-gray-700 hover:text-black font-rubik font-medium">
                 Log in
             </div>
-            <div v-if="isAuthentication" @click="logOut()" class="cursor-pointer ml-auto block text-gray-800 hover:text-black font-rubik font-medium">
-                Log out
+            <div v-if="isAuthentication" @click="logOut()" class="ml-auto block">
+                <router-link to="/" class="cursor-pointer text-gray-700 hover:text-black text-base font-rubik font-medium">
+                    Log out
+                </router-link>
             </div>
         </div>
     </div>

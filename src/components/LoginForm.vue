@@ -47,6 +47,7 @@ const logInForm = reactive ({
     logInForm.confirmPassword = null,
     logInForm.isPasswordError = false,
     logInForm.isAuthentication = null
+    window.location.reload();
   }else{
     logInForm.isPasswordError = true
     logInForm.isAuthentication = false

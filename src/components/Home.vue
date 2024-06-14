@@ -10,17 +10,19 @@ const isAuthentication = ref(isAuthenticationParse)
 const customers = ref(addCustomersParse)
 const searchCustomer = ref('');
 
-
 const isShowDemoCustomer = () =>{
-    let isShow = true
-    if(addCustomersParse){
-        isShow = false
-    }else{
+   
+    let isShow = null
+    
+    if(customers.value.length === 0){
         isShow = true
+    }else{
+        isShow = false
     }
     return isShow
     
 }
+
 
 // const filteredCustomers = computed(() => {
 //   const searchValue = searchCustomer.value.toLowerCase();

@@ -7,6 +7,8 @@ const store = reactive({
         this.findCustomerIndex = index
     },
 
+
+
     login(){
         this.isModalOpen = true
     }
