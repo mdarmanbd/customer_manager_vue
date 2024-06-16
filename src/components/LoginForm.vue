@@ -22,7 +22,6 @@ const modal = ref(null);
       })
 }
 
-
 const logInForm = reactive ({
   email:'',
   password: null,
@@ -30,9 +29,6 @@ const logInForm = reactive ({
   isPasswordError: false,
   isAuthentication : null
 })
-
-
-
 
  const submitButton = () =>{
     

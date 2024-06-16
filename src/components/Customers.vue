@@ -15,8 +15,24 @@ const phone = ref()
 const address = ref()
 const city = ref()
 const state = ref()
-const count = ref(1)
+// const count = ref(1)
 const isPhoneNumerError = ref(false)
+const uploadImage = ref(null)
+
+const onFileChange = (event) => {
+   const file = event.target.files[0]
+
+   if(file.type.startsWith('image/')){
+    const reader = new FileReader()
+    reader.onload = (event) => {
+        uploadImage.value =  event.target.result
+    }
+    reader.readAsDataURL(file);
+   }else{
+    uploadImage.value = null
+   }
+    
+}
 
 const toasterNotification = (massage,type) => {
     toast(massage, {
@@ -34,10 +50,7 @@ const toasterNotification = (massage,type) => {
 const submitButton = () => {
     const regexPhone = /^\d{2}$/;
     if(regexPhone.test(phone.value)){
-
         toasterNotification('Successfuly add a customers','success')
-
-
         isPhoneNumerError.value = false
         lastUsedId++;
         addCustomers.push({
@@ -45,6 +58,7 @@ const submitButton = () => {
             id: lastUsedId,
             firstName: firstName.value,
             lastName: lastName.value,
+            image: uploadImage.value,
             amount: amount.value,
             email: email.value,
             phone: phone.value,
@@ -57,6 +71,7 @@ const submitButton = () => {
 
         firstName.value = ''
         lastName.value = ''
+        uploadImage.value = null,
         amount.value = 
         email.value = ''
         phone.value = 
@@ -87,18 +102,29 @@ const submitButton = () => {
                 <!-- <p>{{ addCustomers }}</p> -->
                 <p class="text-sm text-gray-900 font-bold my-3">Customers info</p>
                 <form @submit.prevent="submitButton()">
-                    <div class="flex items-center">
-                        <label class="text-sm text-gray-800 font-medium block w-[100px]">First Name: </label>
-                        <input v-model="firstName" type="text" required class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="First name">
-                    </div>
-                    <div class="flex items-center mt-3">
-                        <label class="text-sm text-gray-800 font-medium w-[100px] block ">Last Name: </label>
-                        <input v-model="lastName" type="text" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Last name">
-                    </div>
+                    <div class="grid grid-cols-4">
+                        <div class="col-span-3">
+                            <div class="flex items-center">
+                                <label class="text-sm text-gray-800 font-medium block w-[100px]">First Name: </label>
+                                <input v-model="firstName" type="text" required class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="First name">
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <label class="text-sm text-gray-800 font-medium w-[100px] block ">Last Name: </label>
+                                <input v-model="lastName" type="text" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Last name">
+                            </div>
+                            <div class="flex items-center mt-3">
+                                <label class="text-sm text-gray-800 font-medium w-[100px] block ">Amount: </label>
+                                <input v-model="amount" required type="number" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Amout">
+                            </div>
 
-                    <div class="flex items-center mt-3">
-                        <label class="text-sm text-gray-800 font-medium w-[100px] block ">Amount: </label>
-                        <input v-model="amount" required type="number" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Amout">
+                        </div>
+                        <div class="  bg-red-300">
+                            
+                            <div v-if="uploadImage" class=" ">
+                                <img :src="uploadImage" class="m-auto border border-gray-500 w-[110px] h-[110px]" alt="Image Preview" />
+                            </div>
+                            <input type="file" @change="onFileChange" class="text-xs text-center" accept="image/*" />
+                        </div>
                     </div>
 
                     <p class="text-sm text-gray-900 font-bold my-4">Customers Contact</p>

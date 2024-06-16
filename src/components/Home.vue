@@ -12,14 +12,14 @@ const searchCustomer = ref('');
 
 const isShowDemoCustomer = () =>{
    
-    let isShow = null
+    // let isShow = null
     
-    if(customers.value.length === 0){
-        isShow = true
-    }else{
-        isShow = false
-    }
-    return isShow
+    // if(customers.value.length === 0){
+    //     isShow = true
+    // }else{
+    //     isShow = false
+    // }
+    // return isShow
     
 }
 
@@ -60,6 +60,7 @@ const addCustomers = () => {
             <table class="table-auto w-full text-left mt-5">
                 <thead>
                     <tr class="[&>*]:text-gray-700 [&>*]:text-base [&>*]:font-medium border-b border-gray-400">
+                        <th class="pb-1">customer Img</th>
                         <th class="pb-1">First Name</th>
                         <th class="pb-1">Amout</th>
                         <th class="pb-1">Location</th>
@@ -77,6 +78,11 @@ const addCustomers = () => {
                         </td>
                     </tr>
                     <tr v-for="(customer,index) in customers" :key="customer.id" >
+                        <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">
+                            <div class="w-10 h-10">
+                                <img :src="customer.image" class="w-10 h-10 rounded-full">
+                            </div>
+                        </td>
                         <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.firstName }}</td>
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.amount }}</td>
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.address }}</td>

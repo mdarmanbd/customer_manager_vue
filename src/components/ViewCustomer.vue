@@ -78,18 +78,29 @@ const submitButton = () => {
                 </h4>
             </div>
             <form v-if="isEditPageShow" @submit.prevent="submitButton()" class="mt-5">
-                <div class="flex items-center">
-                    <label class="text-sm text-gray-800 font-medium block w-[100px]">First Name: </label>
-                    <input v-model="customer.firstName" type="text" required class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="First name">
-                </div>
-                <div class="flex items-center mt-3">
-                    <label class="text-sm text-gray-800 font-medium w-[100px] block ">Last Name: </label>
-                    <input v-model="customer.lastName" type="text" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Last name">
-                </div>
+                
+                <div class="grid grid-cols-4">
+                    <div class="col-span-3">
+                        <div class="flex items-center">
+                            <label class="text-sm text-gray-800 font-medium block w-[100px]"> First Name: </label>
+                            <input v-model="customer.firstName" type="text" required class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="First name">
+                        </div>
+                        <div class="flex items-center mt-3">
+                            <label class="text-sm text-gray-800 font-medium w-[100px] block ">Last Name: </label>
+                            <input v-model="customer.lastName" type="text" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Last name">
+                        </div>
+                        <div class="flex items-center mt-3">
+                            <label class="text-sm text-gray-800 font-medium w-[100px] block ">Amount: </label>
+                            <input v-model="customer.amount" required type="number" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Amout">
+                        </div>
 
-                <div class="flex items-center mt-3">
-                    <label class="text-sm text-gray-800 font-medium w-[100px] block ">Amount: </label>
-                    <input v-model="customer.amount" required type="number" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Amout">
+                    </div>
+                    <div class="bg-red-600">
+                        
+                                <img :src="customer.iamge" class="m-auto border border-gray-500 w-[110px] h-[110px]" alt="Image Preview" />
+                            
+                            <!-- <input type="file" @change="onFileChange" class="text-xs text-center" accept="image/*" /> -->
+                    </div>
                 </div>
 
                 <p class="text-sm text-gray-900 font-bold my-4">Customers Contact</p>
