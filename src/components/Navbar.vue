@@ -21,7 +21,7 @@ const logOut = () => {
 </script>
 
 <template>
-    <div :class="store.isModalOpen ? 'bg-gray-100 bg-opacity-50 transition':'bg-gray-100'" class=" sticky top-0 z-50">
+    <div :class="store.isModalOpen ? 'bg-gray-100 bg-opacity-50 transition':'bg-gray-100'" class="hidden md:block  sticky top-0 z-50">
         <div class="flex items-center w-[850px] m-auto py-2">
             <ul class="[&>li]:text-gray-800 flex space-x-5 [&>*]:text-base [&>*]:font-rubik [&>*]:font-medium">
                 <li >
@@ -39,6 +39,30 @@ const logOut = () => {
             </div>
             <div v-if="isAuthentication" @click="logOut()" class="ml-auto block">
                 <router-link to="/" class="cursor-pointer text-gray-700 hover:text-black text-base font-rubik font-medium">
+                    Log out
+                </router-link>
+            </div>
+        </div>
+    </div>
+    <!---responsive navbar start-->
+    <div :class="store.isModalOpen ? 'bg-gray-100 bg-opacity-50 transition':'bg-gray-100'" class="block md:hidden sticky top-0 z-50 ">
+        <div class="flex items-center m-auto py-2 ">
+            <ul class="[&>li]:text-gray-800 flex space-x-5 [&>*]:text-base [&>*]:font-rubik [&>*]:font-medium">
+                <li class="hidden md:block">
+                    <a href="#">Customers</a>
+                </li>
+                <li>
+                    <router-link to="/">Home</router-link>
+                </li>
+                <li>
+                    <router-link to="/About">About</router-link>
+                </li>
+            </ul>
+            <div v-if="!isAuthentication" @click="store.login()" class="cursor-pointer ml-auto block text-base text-gray-700 hover:text-black font-rubik font-medium pr-2">
+                Log in
+            </div>
+            <div v-if="isAuthentication" @click="logOut()" class="ml-auto block pr-2">
+                <router-link to="/" class="cursor-pointer text-gray-700 hover:text-black text-base font-rubik font-medium ">
                     Log out
                 </router-link>
             </div>

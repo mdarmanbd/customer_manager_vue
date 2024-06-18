@@ -61,9 +61,9 @@ const logInForm = reactive ({
     <Teleport to="body">
       <Transition name="modal">
         <div @click="outsideClick()" v-if="store.isModalOpen" class="fixed top-0 left-0 w-full h-full bg-gray-100 bg-opacity-50 flex justify-center items-center">
-          <div class="modal m-auto bg-white shadow rounded" ref="modal">
-            <button @click="store.isModalOpen = false " class="bg-gray-200 float-right mt-2 py-0.5 px-4 text-black font-normal text-lg me-4 ">
-                close
+          <div class=" w-[400px] h-[500px] top-[10%] z-[999] fixed m-auto bg-white shadow rounded" ref="modal">
+            <button @click="store.isModalOpen = false" class="float-right mt-2 text-black font-normal text-lg me-4 ">
+                <img class=" rounded-full w-7 text-center grid items-center bg-gray-200 p-0.5" src="../svg/cross.svg">
             </button>
             <div class="absolute w-full block top-12 px-8">
                 <h3 class="text-gray-800 text-base font-semibold text-center mb-1">Log in</h3>
@@ -71,7 +71,7 @@ const logInForm = reactive ({
                
                 <form @submit.prevent="submitButton()" >
                     <label class="block text-gray-800 text-sm font-medium pb-2">Email:</label>
-                    <input v-model="logInForm.email" type="text" class="bg-gray-100 w-full focus:outline-none py-0.5 pl-2 text-gray-800 text-base font-normal">
+                    <input v-model="logInForm.email" type="email" required class="bg-gray-100 w-full focus:outline-none py-0.5 pl-2 text-gray-800 text-base font-normal">
                     
                     <label class=" text-gray-800 text-sm font-medium mt-4 pb-2 block">Password:</label>
                     <input v-model="logInForm.password" type="text" class="bg-gray-100 w-full focus:outline-none py-0.5 pl-2 text-gray-800 text-base font-normal ">
