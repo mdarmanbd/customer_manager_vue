@@ -12,14 +12,14 @@ const searchCustomer = ref('');
 
 const isShowDemoCustomer = () =>{
    
-    // let isShow = null
+    let isShow = null
     
-    // if(customers.value.length === 0){
-    //     isShow = true
-    // }else{
-    //     isShow = false
-    // }
-    // return isShow
+    if(customers.value.length === 0){
+        isShow = true
+    }else{
+        isShow = false
+    }
+    return isShow
     
 }
 
@@ -60,9 +60,8 @@ const addCustomers = () => {
             <table class="table-auto w-full text-left mt-5">
                 <thead>
                     <tr class="[&>*]:text-gray-700 [&>*]:text-base [&>*]:font-medium border-b border-gray-400">
-                        <th class="pb-1">customer Img</th>
+                        <th class="pb-1">Customer Img</th>
                         <th class="pb-1">First Name</th>
-                        <th class="pb-1">Amout</th>
                         <th class="pb-1">Location</th>
                     </tr>
                 </thead>
@@ -84,9 +83,8 @@ const addCustomers = () => {
                             </div>
                         </td>
                         <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.firstName }}</td>
-                        <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.amount }}</td>
                         <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.address }}</td>
-                        <td class="border-b border-gray-300 py-2 flex justify-center pb-2">
+                        <td class="border-b border-gray-300 py-4 flex justify-center ">
                             <router-link :to="`/Customers/${customer.id}`">
                                 <button @click="store.coustomerView(index)" class="text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
                                     View

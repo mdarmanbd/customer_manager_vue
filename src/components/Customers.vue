@@ -118,12 +118,13 @@ const submitButton = () => {
                             </div>
 
                         </div>
-                        <div class="  bg-red-300">
-                            
-                            <div v-if="uploadImage" class=" ">
-                                <img :src="uploadImage" class="m-auto border border-gray-500 w-[110px] h-[110px]" alt="Image Preview" />
+                        <div class="block overflow-hidden">
+                            <div class="border border-dotted border-gray-400 mx-5 grid items-center h-[110px]">
+                                <div v-if="uploadImage" class=" ">
+                                    <img :src="uploadImage" class="m-auto border border-gray-500 w-full h-[110px] " alt="Image Preview" />
+                                </div>
                             </div>
-                            <input type="file" @change="onFileChange" class="text-xs text-center" accept="image/*" />
+                            <input type="file" @change="onFileChange" class="text-xs text-center ml-5 " accept="image/*" />
                         </div>
                     </div>
 

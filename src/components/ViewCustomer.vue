@@ -13,7 +13,7 @@ const findCustomerIndex = store.findCustomerIndex
 const addCustomersParse = JSON.parse(localStorage.getItem('addCustomers'))
 const customer = ref( addCustomersParse[findCustomerIndex] || {}) 
 const isEditPageShow = ref(false)
-
+const uploadImage = ref(null)
 
 
 const editCustomer = () => {
@@ -29,7 +29,24 @@ const deleteCustomer = () => {
 const backToCustomer = () =>{
     isEditPageShow.value = false
 }
+
+const onFileChange = (event) => {
+   const file = event.target.files[0]
+
+   if(file.type.startsWith('image/')){
+    const reader = new FileReader()
+    reader.onload = (event) => {
+        uploadImage.value =  event.target.result
+    }
+    reader.readAsDataURL(file);
+   }else{
+    uploadImage.value = null
+   }
+    
+}
+
 const submitButton = () => {
+    addCustomersParse[findCustomerIndex].image = uploadImage
     addCustomersParse[findCustomerIndex] = customer.value;
     localStorage.setItem('addCustomers', JSON.stringify(addCustomersParse));
     router.push('/')
@@ -95,11 +112,16 @@ const submitButton = () => {
                         </div>
 
                     </div>
-                    <div class="bg-red-600">
-                        
-                                <img :src="customer.iamge" class="m-auto border border-gray-500 w-[110px] h-[110px]" alt="Image Preview" />
-                            
-                            <!-- <input type="file" @change="onFileChange" class="text-xs text-center" accept="image/*" /> -->
+                    <div class="block overflow-hidden">
+                        <div class="border border-dotted border-gray-400 mx-5 grid items-center h-[110px]">
+                            <div v-if="!uploadImage">
+                                <img :src="customer.image" class="m-auto border border-gray-500 w-full h-[110px] " alt="Image Preview" />
+                            </div>
+                            <div v-if="uploadImage">
+                                <img :src="uploadImage" class="m-auto border border-gray-500 w-full h-[110px] " alt="Image Preview" />
+                            </div>
+                        </div>
+                        <input type="file" @change="onFileChange" class="text-xs text-center ml-5 " accept="image/*" />
                     </div>
                 </div>
 
@@ -114,7 +136,7 @@ const submitButton = () => {
                     <label class="text-sm text-gray-800 font-medium block w-[100px]">Phone: </label>
                     <input v-model="customer.phone" type="number" required class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Phone">
                 </div>
-
+                
                 <p class="text-sm text-gray-900 font-bold my-4">Customers Location</p>
 
                 <div class="flex items-center">
