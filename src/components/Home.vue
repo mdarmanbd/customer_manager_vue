@@ -12,14 +12,14 @@ const searchCustomer = ref('');
 
 const isShowDemoCustomer = () =>{
    
-    let isShow = null
+    // let isShow = null
     
-    if(customers.value.length === 0){
-        isShow = true
-    }else{
-        isShow = false
-    }
-    return isShow
+    // if(customers.value.length === 0){
+    //     isShow = true
+    // }else{
+    //     isShow = false
+    // }
+    // return isShow
     
 }
 

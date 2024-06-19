@@ -98,7 +98,6 @@ const submitButton = () => {
                 <div class="order-1 md:order-2 mb-5 md:mb-0 md:relative">
                     <img :src="customer.image" class="m-auto w-[200px] h-[200px] md:absolute md:top-0 md:left-0 md:-translate-y-1/4 md:translate-x-1/2 " alt="Image Preview" />
                 </div>
-               
             </div>
             <form v-if="isEditPageShow" @submit.prevent="submitButton()" class="mt-5 px-2 md:px-0">
                 <div class="grid md:grid-cols-4">
@@ -115,7 +114,6 @@ const submitButton = () => {
                             <label class="text-xs md:text-sm text-gray-800 font-medium w-[100px] block ">Amount: </label>
                             <input v-model="customer.amount" required type="number" class="focus:outline focus:outline-gray-400 text-xs md:text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Amout">
                         </div>
-
                     </div>
                     <div class="order-1 md:order-2 block overflow-hidden mb-5 md:mb-0">
                         <div class=" mx-5 grid items-center h-[180px] md:h-[110px]">
@@ -129,21 +127,16 @@ const submitButton = () => {
                         <input type="file" @change="onFileChange" class="text-xs block w-[180px] m-auto md:w-[110px] mt-1 " accept="image/*" />
                     </div>
                 </div>
-
                 <p class="text-xs md:text-sm text-gray-900 font-bold my-4">Customers Contact</p>
-
                 <div class="flex items-center">
                     <label class="text-xs md:text-sm text-gray-800 font-medium w-[100px] block ">Email: </label>
                     <input v-model="customer.email" type="email" required class="focus:outline focus:outline-gray-400 text-xs md:text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="example@.com">
                 </div>
-                
                 <div class="flex items-center mt-3">
                     <label class="text-xs md:text-sm text-gray-800 font-medium block w-[100px]">Phone: </label>
                     <input v-model="customer.phone" type="number" required class="focus:outline focus:outline-gray-400 text-xs md:text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Phone">
                 </div>
-                
                 <p class="text-xs md:text-sm text-gray-900 font-bold my-4">Customers Location</p>
-
                 <div class="flex items-center">
                     <label class="text-xs md:text-sm text-gray-800 font-medium block w-[100px]">Address: </label>
                     <input v-model="customer.address" type="text" class="focus:outline focus:outline-gray-400 text-xs md:text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="Address">
@@ -156,7 +149,6 @@ const submitButton = () => {
                     <label class="text-xs md:text-sm text-gray-800 font-medium block w-[100px]">State: </label>
                     <input v-model="customer.state" type="text" class="focus:outline focus:outline-gray-400 text-xs md:text-sm font-normal w-full py-1 pl-2 bg-gray-200" placeholder="State">
                 </div>
-                
                 <button type="submit" class="mt-3 text-xs md:text-sm bg-cyan-600 block items-center py-1.5 px-3 text-white font-normal rounded cursor-pointer">
                     Submit
                 </button>
