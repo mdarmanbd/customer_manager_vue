@@ -79,7 +79,7 @@ const addCustomers = () => {
                     <tr v-for="(customer,index) in customers" :key="customer.id" >
                         <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">
                             <div class="w-10 h-10">
-                                <img :src="customer.image" class="w-10 h-10 rounded-full">
+                                <img :src="customer.image" class="w-10 h-10 rounded-full" alt="img">
                             </div>
                         </td>
                         <td class="pl-2 border-b border-gray-300 py-2 text-xs md:text-sm font-normal text-gray-800">{{ customer.firstName }}</td>
