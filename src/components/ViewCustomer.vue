@@ -207,10 +207,13 @@ const onFileChange = (event) => {
 }
 
 const submitButton = () => {
-    addCustomersParse[findCustomerIndex].image = uploadImage
-    addCustomersParse[findCustomerIndex] = customer.value;
-    localStorage.setItem('addCustomers', JSON.stringify(addCustomersParse));
-    router.push('/')
+    if(uploadImage.value){
+        addCustomersParse[findCustomerIndex].image = uploadImage
+    }else{
+        addCustomersParse[findCustomerIndex] = customer.value;
+        localStorage.setItem('addCustomers', JSON.stringify(addCustomersParse));
+        router.push('/')
+    }
    
 }
 </script>
@@ -229,7 +232,7 @@ const submitButton = () => {
                 </button> 
             </div>
             <div class="px-2 md:px-0 flex items-center justify-between pt-6">
-                <h3 class="text-sm md:text-base font-semibold text-gray-600">{{ customer.firstName }}</h3>
+                <h3 class="text-sm md:text-base font-semibold text-gray-600">{{ customer.firstName }} </h3>
                 <div class="flex gap-3">
                     <button @click="editCustomer()" class="bg-cyan-700 py-1 px-1.5 md:px-2 text-white text-xs md:text-sm font-medium">Edit</button>
                     <button @click="deleteCustomer()" class="bg-red-700 py-1 px-1.5 md:px-2 text-white text-xs md:text-sm font-medium">Delete</button>
