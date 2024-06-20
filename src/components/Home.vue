@@ -12,14 +12,14 @@ const searchCustomer = ref('');
 
 const isShowDemoCustomer = () =>{
    
-    // let isShow = null
+    let isShow = null
     
-    // if(customers.value.length === 0){
-    //     isShow = true
-    // }else{
-    //     isShow = false
-    // }
-    // return isShow
+    if(customers.value.length === 0){
+        isShow = true
+    }else{
+        isShow = false
+    }
+    return isShow
     
 }
 
@@ -49,17 +49,17 @@ const addCustomers = () => {
                 </p>
               </div>
           </div>
-        <div :class=" isAuthentication ? 'pt-5':'pt-14'" class="w-full px-2 md:px-0 md:w-[850px] m-auto ">
+        <div :class=" isAuthentication ? 'pt-10':'pt-14'" class="w-full px-2 md:px-0 md:w-[850px] m-auto ">
             <div class="flex justify-between items-center">
                 <h3 class="text-base md:text-lg font-semibold text-gray-700">Customers</h3>
-                    <button v-if="!isAuthentication" class="cursor-not-allowed text-xs md:text-sm bg-gray-200 block items-center py-1.5 px-3 text-gray-800 font-medium rounded ">Add Customers</button>
-                    <button v-if="isAuthentication" @click="addCustomers()" class="cursor-pointer text-xs md:text-sm bg-gray-200 block items-center py-1 md:py-1.5 px-2 md:px-3 text-gray-800 font-medium rounded ">Add Customers</button>
+                    <button v-if="!isAuthentication" disabled class="cursor-not-allowed text-sm bg-gray-200 block items-center py-1.5 px-3 text-gray-800 font-medium rounded ">Add Customers</button>
+                    <button v-if="isAuthentication" @click="addCustomers()" class="cursor-pointer text-sm bg-gray-200 block items-center py-1 md:py-1.5 px-2 md:px-3 text-gray-800 font-medium rounded ">Add Customers</button>
             </div>
             <!-- <input v-model="searchCustomer" type="text" class="w-full focus:outline-none mt-8 bg-gray-200 broder text-sm font-normal border-gray-100 px-2 py-2" placeholder="Enter Last Name"> -->
             
             <table class="table-auto w-full text-left mt-5">
                 <thead>
-                    <tr class="[&>*]:text-gray-700 [&>*]:text-xs md:[&>*]:text-base [&>*]:font-medium border-b border-gray-400">
+                    <tr class="[&>*]:text-gray-700 [&>*]:text-sm md:[&>*]:text-base [&>*]:font-medium border-b border-gray-400">
                         <th class="pb-1">Image</th>
                         <th class="pb-1">First Name</th>
                         <th class="pb-1">Location</th>
@@ -67,11 +67,13 @@ const addCustomers = () => {
                 </thead>
                 <tbody >
                     <tr v-if="isShowDemoCustomer()">
-                        <td class="pl-2 border-b border-gray-300 py-2 text-xs md:text-sm font-normal text-gray-800">Hello World</td>
-                        <td class="border-b border-gray-300 py-2 text-xs md:text-sm font-normal text-gray-800">Hello World</td>
-                        <td class="border-b border-gray-300 py-2 text-xs md:text-sm font-normal text-gray-800">Hello World</td>
+                        <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">
+                            <img alt="img">
+                        </td>
+                        <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">Hello World</td>
+                        <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">Hello World</td>
                         <td class="border-b border-gray-300 py-2 flex justify-center m-auto ">
-                            <button class=" text-xs md:text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
+                            <button class="text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
                                 Demo
                             </button>
                         </td>
@@ -82,11 +84,11 @@ const addCustomers = () => {
                                 <img :src="customer.image" class="w-10 h-10 rounded-full" alt="img">
                             </div>
                         </td>
-                        <td class="pl-2 border-b border-gray-300 py-2 text-xs md:text-sm font-normal text-gray-800">{{ customer.firstName }}</td>
-                        <td class="border-b border-gray-300 py-2 text-xs md:text-sm font-normal text-gray-800">{{ customer.address }}</td>
+                        <td class="pl-2 border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.firstName }}</td>
+                        <td class="border-b border-gray-300 py-2 text-sm font-normal text-gray-800">{{ customer.address }}</td>
                         <td class="border-b border-gray-300 py-5 md:py-4 flex justify-center ">
                             <router-link :to="`/Customers/${customer.id}`">
-                                <button @click="store.coustomerView(index)" class=" text-xs md:text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
+                                <button @click="store.coustomerView(index)" class="text-sm bg-gray-200 block items-center py-0.5 px-2 text-gray-800 font-medium rounded cursor-pointer">
                                     View
                                 </button>
                             </router-link>
