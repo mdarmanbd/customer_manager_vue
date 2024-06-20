@@ -209,11 +209,11 @@ const onFileChange = (event) => {
 const submitButton = () => {
     if(uploadImage.value){
         addCustomersParse[findCustomerIndex].image = uploadImage
-    }else{
+    }
         addCustomersParse[findCustomerIndex] = customer.value;
         localStorage.setItem('addCustomers', JSON.stringify(addCustomersParse));
         router.push('/')
-    }
+    
    
 }
 </script>
@@ -314,7 +314,7 @@ const submitButton = () => {
                     <input v-model="customer.state" type="text" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-2 md:py-1 pl-2 bg-gray-200" placeholder="State">
                 </div>
                 
-                <button type="submit" class="mt-3 text-xs md:text-sm bg-cyan-600 block items-center py-1.5 px-3 text-white font-normal rounded cursor-pointer">
+                <button type="submit" class="mt-3 mb-5 text-xs md:text-sm bg-cyan-600 block items-center py-1.5 px-3 text-white font-normal rounded cursor-pointer">
                     Submit
                 </button>
             </form>
