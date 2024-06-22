@@ -32,8 +32,8 @@ const addCustomers = () => {
         <!-- {{ searchCustomer }} -->
           <div v-if="!isAuthentication" class="pt-3 md:w-[400px] m-auto">
               <div class="mx-5 md:mx-0 md:w-[400px] block m-auto">
-                <p class="text-base text-cyan-600 font-medium text-center  ">
-                    please log in with your email account
+                <p class="text-base text-cyan-600 font-medium text-center">
+                    please log-in with your email account
                 </p>
               </div>
           </div>
