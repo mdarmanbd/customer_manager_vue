@@ -46,6 +46,7 @@ const onFileChange = (event) => {
 }
 
 const submitButton = () => {
+    store.demoCustomer = false
     if(uploadImage.value){
         addCustomersParse[findCustomerIndex].image = uploadImage
     }
@@ -58,8 +59,8 @@ const submitButton = () => {
 </script>
 
 <template>
-    <div class="bg-gray-50 ">
-        <div class="md:w-[850px] m-auto pt-5 h-auto bg-gray-50 md:h-screen">
+    <div class="bg-gray-50 pt-5 pb-10">
+        <div class="md:w-[850px] m-auto">
             <router-link v-if="!isEditPageShow" to="/" class="block pb-3 pl-2 md:pl-0">
               <button class="bg-gray-200 py-1 px-3 text-gray-800 text-sm font-medium">
                 Back 
@@ -77,7 +78,7 @@ const submitButton = () => {
                     <button @click="deleteCustomer()" class="bg-red-700 py-1 px-1.5 md:px-2 text-white text-xs md:text-sm font-medium">Delete</button>
                 </div>
             </div>
-            <div v-if="!isEditPageShow" class="grid md:grid-cols-2 mt-10 pl-2 md:pl-0 ">
+            <div v-if="!isEditPageShow" class="grid md:grid-cols-2 mt-10 pl-2 md:pl-0 h-screen">
                 <div class="order-2 md:order-1">
                     <h4 class="text-gray-600 font-normal text-sm md:text-base pb-2">
                         Customer ID : <span class="font-medium text-green-500">{{ customer.id }}</span> 
@@ -148,11 +149,6 @@ const submitButton = () => {
                     <label class="text-sm text-gray-800 font-medium block w-[100px]">City: </label>
                     <input v-model="customer.city" type="text" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-2 md:py-1 pl-2 bg-gray-200" placeholder="City">
                 </div>
-                <div class="md:flex items-center mt-3">
-                    <label class="text-sm text-gray-800 font-medium block w-[100px]">State: </label>
-                    <input v-model="customer.state" type="text" class="focus:outline focus:outline-gray-400 text-sm font-normal w-full py-2 md:py-1 pl-2 bg-gray-200" placeholder="State">
-                </div>
-                
                 <button type="submit" class="mt-3 mb-10 md:mb-5 text-sm bg-cyan-600 block items-center py-1.5 px-3 text-white font-normal rounded cursor-pointer">
                     Submit
                 </button>

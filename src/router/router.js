@@ -27,7 +27,11 @@ const routes = [
     },
     {
         path:'/About',
-        component:About
+        component:About,
+        meta: {
+            requiresAuthentication: true
+        }
+
     }
    
 ]
